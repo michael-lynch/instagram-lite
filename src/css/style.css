@@ -1,0 +1,35 @@
+body {
+	margin: 0;
+	padding: 40px;
+}
+
+h1 {
+	font: 30px Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 40px;
+	margin: 0 0 40px 0;
+	color: #517FA4;
+}
+
+a {
+	color: #517FA4;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 200px;
+}
+
+ul li img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
