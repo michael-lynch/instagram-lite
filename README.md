@@ -8,21 +8,26 @@ A simple, lightweight jQuery plugin used to display a user's Instagram photos.
 
 Include jQuery and the plugin in the head or footer of your page.
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+```html
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
-    <script src="/js/plugins/instagramLite.js"></script>
+<script src="/js/plugins/instagramLite.js"></script>
+```
     
 Create a list with an ID or class that will contain the user's Instagram photos.
 
-	<ul class="instagram-lite"></ul>
+```html
+<ul class="instagram-lite"></ul>
+```
     
 Initialize the plugin targeting the class, ID or element and pass the function your client ID (api key) and username. 
 
-	$('.instagram-lite').instagramLite({
-		clientID: 'XXXXXXXXXXXXXXXXXXXXX',
-		username: 'yourusername'
-	});
-	
+```js
+$('.instagram-lite').instagramLite({
+	clientID: 'XXXXXXXXXXXXXXXXXXXXX',
+	username: 'yourusername'
+});
+```
 
 ####Required Properties
 
@@ -67,25 +72,26 @@ clientID: string
 
 #####Example:
 
-		$(function() {
+```js
+$(function() {
+	
+	$('.instagram-lite').instagramLite({
+		clientID: 'XXXXXXXXXXXXXXXXXXXXX',
+		username: 'yourusername',
+		list: false,
+		urls: false,
+		error: function(errorCode, errorMessage) {
+		
+			console.log('There was an error with the request');
 			
-			$('.instagram-lite').instagramLite({
-				clientID: 'XXXXXXXXXXXXXXXXXXXXX',
-				username: 'yourusername',
-				list: false,
-				urls: false,
-				error: function(errorCode, errorMessage) {
-				
-					console.log('There was an error with the request');
-					
-					if(errorCode && errorMessage) {
-						console.log(errorCode +': '+ errorMessage);
-					}
-				}
-				success: function() {
-					console.log('The request was successful!');
-				}
-			});
-				
-		});
-			
+			if(errorCode && errorMessage) {
+				console.log(errorCode +': '+ errorMessage);
+			}
+		}
+		success: function() {
+			console.log('The request was successful!');
+		}
+	});
+		
+});
+```		
