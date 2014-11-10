@@ -13,132 +13,133 @@ Licensed under the MIT license
 
     $.fn.instagramLite = function(options) {
     
-    	//return if no element was bound
-		//so chained events can continue
+    	// return if no element was bound
+		// so chained events can continue
 		if(!this.length) { 
 			return this; 
 		}
 
-		//define default parameters
+		// define default parameters
         var defaults = {
             username: null,
             clientID: null,
-            limit: 0,
+            limit: null,
             list: true,
             urls: false,
-            max_id:null,
-            loadMore:false,
+            max_id: null,
+            loadMore: false,
             error: function() {},
             success: function() {}
         }
         
-        //define plugin
+        // define plugin
         self.plugin = this;
 
-        //define settings
+        // define settings
         self.plugin.settings = {}
  
-        //merge defaults and options
+        // merge defaults and options
         self.plugin.settings = $.extend({}, defaults, options);
 
-        //define element
+        // define element
         self.el = $(this);
        
+        // init
         self.loadContent();
+        
+        // bind load more click event
         if(plugin.settings.loadMore){
         	$('.load-more').on('click',function(e){
 	        	e.preventDefault();
 	        	self.loadContent();
 	        });
-        }
-        
-
+        } 
     },
-    getMaxId=function(arrayPost){
+    getMaxId = function(items){
     
-    	return arrayPost[arrayPost.length-1].id;
+    	// return id of last item
+    	return items[items.length-1].id;
     },
     loadContent = function(){
 
-    	//if client ID and username were provided
+    	// if client ID and username were provided
         if(plugin.settings.clientID && plugin.settings.username) {
         
-	        //for each element
+	        // for each element
 	        el.each(function() {
 	        
-	        	//search the user
-	        	//to get user ID
+	        	// search the user
+	        	// to get user ID
 	        	$.ajax({
 		        	type: 'GET',
 		        	url: 'https://api.instagram.com/v1/users/search?q='+plugin.settings.username+'&client_id='+plugin.settings.clientID+'&callback=?',
 		        	dataType: 'jsonp',
 		        	success: function(data) {
 		        	
-		        		//for each user returned
+		        		// for each user returned
 		        		for(var i = 0; i < data.data.length; i++) {
 		        		
-		        			//define user namespace
+		        			//d efine user namespace
 			        		var thisUser = data.data[i];
 			        		
-			        		//if returned username matches supplied username
+			        		// if returned username matches supplied username
 			        		if(thisUser.username === plugin.settings.username) {
 			        		
-			        			//get user's media using their ID
-								var url = '';
-			        			if(plugin.settings.max_id){
-			        				url='https://api.instagram.com/v1/users/'+thisUser.id+'/media/recent/?client_id='+plugin.settings.clientID+'&max_id='+plugin.settings.max_id+'&count='+plugin.settings.limit+'&callback=?'
-			        			}else {
-			        				url='https://api.instagram.com/v1/users/'+thisUser.id+'/media/recent/?client_id='+plugin.settings.clientID+'&count='+plugin.settings.limit+'&callback=?'
-			        			}
+			        			// construct API endpoint
+								var url = 'https://api.instagram.com/v1/users/'+thisUser.id+'/media/recent/?client_id='+plugin.settings.clientID+'&count='+plugin.settings.limit+'&callback=?';
+								
+								// concat max id if max id is set
+								url += (plugin.settings.max_id) ? '&max_id='+plugin.settings.max_id : '';
 
-			        			//
 			        			$.ajax({
 						        	type: 'GET',
 						        	url: url,
 						        	dataType: 'jsonp',
 						        	success: function(data) {
 						        		
+						        		// if success status
 						        		if(data.meta.code === 200) {
 											
-							        		//for each piece of media returned
+							        		// for each piece of media returned
 							        		for(var i = 0; i < data.data.length; i++) {
 							        		
-							        			//define media namespace
+							        			// define media namespace
 							        			var thisMedia = data.data[i];
-							        			//console.log(thisMedia.tags);
-							        			//if media type is image
+							        			
+							        			// if media type is image
 							        			if(thisMedia.type === 'image') {
 							        			
-								        			//construct image
+								        			// construct image
 								        			var img = '<img src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
 
-								        			//if url setting is true
+								        			// if url setting is true
 								        			if(plugin.settings.urls) {
 								        			
 								        				var img = '<a href="'+thisMedia.link+'" target="_blank">'+img+'</a>';
 									        			
 								        			}
 								        			
-								        			//if list setting is true
+								        			// if list setting is true
 								        			if(plugin.settings.list) {
 								        				var img = '<li>'+img+'</li>';
 								        			}
 
-
-								        		
-								        			//append image
+								        			// append image
 								        			el.append(img);
 							        			
 							        			}
 							        			
 							        		}
+							        		
+							        		// set new max id
 							        		plugin.settings.max_id = self.getMaxId(data.data);
-							        		//execute error callback
+							        		
+							        		// execute success callback
 							        		plugin.settings.success.call(this);
 						        		
 						        		} else {
 							        		
-							        		//execute error callback
+							        		// execute error callback
 							        		plugin.settings.error.call(this, data.meta.code, data.meta.error_message);
 							        		
 						        		}
@@ -146,7 +147,7 @@ Licensed under the MIT license
 						        	},
 						        	error: function() {
 						        	
-						        		//execute error callback
+						        		// execute error callback
 						        		plugin.settings.error.call(this);
 							        	
 						        	}
@@ -161,7 +162,7 @@ Licensed under the MIT license
 		        	},
 		        	error: function() {
 		        	
-		        		//execute error callback
+		        		// execute error callback
 						plugin.settings.error.call(this);
 			        	
 		        	}
@@ -170,11 +171,8 @@ Licensed under the MIT license
 	        });
         
         } else {
-        
         	console.log('Both a client ID and username are required to use this plugin.');
-	        
         }
-
     }
-
+    
 })(jQuery);

@@ -49,7 +49,7 @@ clientID: string
 <ol>
 
 <li>limit: integer
-<br />An integer that indicates the limit of photos to be returned (default: 10).
+<br />An integer that indicates the amount of photos to be returned. If loadMore is set, the limit property will determine how many photos are loaded each time. (default: 10).
 </li>
 
 <li>list: boolean
@@ -57,7 +57,15 @@ clientID: string
 </li>
 
 <li>urls: boolean
-<br />A boolean value that indicates whether or not the images should be linked to their page on Instagram (default: true).
+<br />A boolean value that indicates whether or not the images should be linked to their page on Instagram (default: false).
+</li>
+
+<li>loadMore: boolean
+<br />A boolean value that indicates whether or not you are using a button to load more photos. (default: 10).
+</li>
+
+<li>limit: string
+<br />A string that indicates the ID of the image that the feed should begin from. (default: null).
 </li>
 
 <li>error: function(errorCode, errorMessage)

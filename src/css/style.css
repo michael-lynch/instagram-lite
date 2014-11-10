@@ -1,10 +1,11 @@
 body {
+	font-family: Helvetica, Arial, sans-serif;
 	margin: 0;
 	padding: 40px;
 }
 
 h1 {
-	font: 30px Helvetica, Arial, sans-serif;
+	font-size: 30px;
 	font-weight: bold;
 	line-height: 40px;
 	margin: 0 0 40px 0;
@@ -12,7 +13,14 @@ h1 {
 }
 
 a {
-	color: #517FA4;
+	color: #517FA4; 
+}
+
+a.load-more {
+	display: block;
+	margin: 20px 0;
+	float: left;
+	width: 100%
 }
 
 ul {

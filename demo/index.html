@@ -25,7 +25,9 @@
 		<h1>Recent Instagram Photos from <a href="http://instagram.com/acozykitchen">@acozykitchen</a></h1>
 
 		<ul class="images"></ul>
-		<div class="load-more">LOAD MORE</div>
+		
+		<a href="#" class="load-more" title="Load more images from Instagram">Load more</a>
+		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		
 		<script src="/src/instagramLite.js"></script>
@@ -33,10 +35,11 @@
 		<script>
 		
 			$('.images').instagramLite({
-				username: 'acozykitchen',
+				username: 'imvideo',
 				clientID: '199554eb34504658a4770d2859b5a583',
 				urls: true,
-				loadMore:true,
+				limit: 10,
+				loadMore: true,
 				error: function(errorCode, errorMessage) {
 				
 					console.log('There was an error');
