@@ -26,6 +26,8 @@
 
 		<ul class="images"></ul>
 		
+		<a href="#" class="load-more">Load more</a>
+		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		
 		<script src="js/plugins/instagramLite.min.js"></script>
@@ -35,7 +37,9 @@
 			$('.images').instagramLite({
 				username: 'acozykitchen',
 				clientID: '199554eb34504658a4770d2859b5a583',
+				limit: 10,
 				urls: true,
+				loadMore: true,
 				error: function(errorCode, errorMessage) {
 				
 					console.log('There was an error');
