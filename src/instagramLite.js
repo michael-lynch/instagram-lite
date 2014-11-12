@@ -27,7 +27,7 @@ Licensed under the MIT license
             list: true,
             urls: false,
             max_id: null,
-            loadMore: false,
+            loadMore: null,
             error: function() {},
             success: function() {}
         }
@@ -49,7 +49,7 @@ Licensed under the MIT license
         
         // bind load more click event
         if(plugin.settings.loadMore){
-        	$('.load-more').on('click',function(e){
+        	$(plugin.settings.loadMore).on('click',function(e){
 	        	e.preventDefault();
 	        	self.loadContent();
 	        });

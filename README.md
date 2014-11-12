@@ -60,8 +60,8 @@ clientID: string
 <br />A boolean value that indicates whether or not the images should be linked to their page on Instagram (default: false).
 </li>
 
-<li>loadMore: boolean
-<br />A boolean value that indicates whether or not you are using a button to load more photos. (default: 10).
+<li>loadMore: string
+<br />A string that defines the class, ID or element you are using as a button to load more photos. (default: null).
 </li>
 
 <li>limit: string
@@ -88,6 +88,7 @@ $(function() {
 		username: 'yourusername',
 		list: false,
 		urls: false,
+		loadMore: '.load-more',
 		error: function(errorCode, errorMessage) {
 		
 			console.log('There was an error with the request');
