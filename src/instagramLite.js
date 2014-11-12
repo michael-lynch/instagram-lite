@@ -76,92 +76,104 @@ Licensed under the MIT license
 		        	dataType: 'jsonp',
 		        	success: function(data) {
 		        	
-		        		// for each user returned
-		        		for(var i = 0; i < data.data.length; i++) {
-		        		
-		        			//d efine user namespace
-			        		var thisUser = data.data[i];
+		        		if(data.data.length) {
+		        	
+			        		// for each user returned
+			        		for(var i = 0; i < data.data.length; i++) {
 			        		
-			        		// if returned username matches supplied username
-			        		if(thisUser.username === plugin.settings.username) {
-			        		
-			        			// construct API endpoint
-								var url = 'https://api.instagram.com/v1/users/'+thisUser.id+'/media/recent/?client_id='+plugin.settings.clientID+'&count='+plugin.settings.limit+'&callback=?';
-								
-								// concat max id if max id is set
-								url += (plugin.settings.max_id) ? '&max_id='+plugin.settings.max_id : '';
-
-			        			$.ajax({
-						        	type: 'GET',
-						        	url: url,
-						        	dataType: 'jsonp',
-						        	success: function(data) {
-						        		
-						        		// if success status
-						        		if(data.meta.code === 200) {
-											
-							        		// for each piece of media returned
-							        		for(var i = 0; i < data.data.length; i++) {
+			        			//d efine user namespace
+				        		var thisUser = data.data[i];
+				        		
+				        		// if returned username matches supplied username
+				        		if(thisUser.username === plugin.settings.username) {
+				        		
+				        			// construct API endpoint
+									var url = 'https://api.instagram.com/v1/users/'+thisUser.id+'/media/recent/?client_id='+plugin.settings.clientID+'&count='+plugin.settings.limit+'&callback=?';
+									
+									// concat max id if max id is set
+									url += (plugin.settings.max_id) ? '&max_id='+plugin.settings.max_id : '';
+	
+				        			$.ajax({
+							        	type: 'GET',
+							        	url: url,
+							        	dataType: 'jsonp',
+							        	success: function(data) {
 							        		
-							        			// define media namespace
-							        			var thisMedia = data.data[i];
-							        			
-							        			// if media type is image
-							        			if(thisMedia.type === 'image') {
-							        			
-								        			// construct image
-								        			var img = '<img src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
-
-								        			// if url setting is true
-								        			if(plugin.settings.urls) {
+							        		// if success status
+							        		if(data.meta.code === 200 && data.data.length) {
+												
+								        		// for each piece of media returned
+								        		for(var i = 0; i < data.data.length; i++) {
+								        		
+								        			// define media namespace
+								        			var thisMedia = data.data[i];
 								        			
-								        				var img = '<a href="'+thisMedia.link+'" target="_blank">'+img+'</a>';
+								        			// if media type is image
+								        			if(thisMedia.type === 'image') {
+								        			
+									        			// construct image
+									        			var img = '<img src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
+	
+									        			// if url setting is true
+									        			if(plugin.settings.urls) {
 									        			
+									        				var img = '<a href="'+thisMedia.link+'" target="_blank">'+img+'</a>';
+										        			
+									        			}
+									        			
+									        			// if list setting is true
+									        			if(plugin.settings.list) {
+									        				var img = '<li>'+img+'</li>';
+									        			}
+	
+									        			// append image
+									        			el.append(img);
+								        			
 								        			}
 								        			
-								        			// if list setting is true
-								        			if(plugin.settings.list) {
-								        				var img = '<li>'+img+'</li>';
-								        			}
-
-								        			// append image
-								        			el.append(img);
-							        			
-							        			}
-							        			
+								        		}
+								        		
+								        		// set new max id
+								        		plugin.settings.max_id = self.getMaxId(data.data);
+								        		
+								        		// execute success callback
+								        		plugin.settings.success.call(this);
+							        		
+							        		} else {
+								        		
+								        		// execute error callback
+								        		plugin.settings.error.call(this, data.meta.code, data.meta.error_message);
+								        		
 							        		}
-							        		
-							        		// set new max id
-							        		plugin.settings.max_id = self.getMaxId(data.data);
-							        		
-							        		// execute success callback
-							        		plugin.settings.success.call(this);
-						        		
-						        		} else {
-							        		
-							        		// execute error callback
-							        		plugin.settings.error.call(this, data.meta.code, data.meta.error_message);
-							        		
-						        		}
-						        	
-						        	},
-						        	error: function() {
-						        	
-						        		// execute error callback
-						        		plugin.settings.error.call(this);
 							        	
-						        	}
-						        });
-			        		
-				        		break;
+							        	},
+							        	error: function() {
+							        	
+							        		// recent media ajax request failed
+							        		// execute error callback
+							        		plugin.settings.error.call(this);
+								        	
+							        	}
+							        });
+				        		
+					        		break;
+					        		
+				        		}
 				        		
 			        		}
+		        		
+		        		} else {
+		        		
+		        			// error finding username
+		        			// execute error callback
+							plugin.settings.error.call(this);
 			        		
 		        		}
 			        	
 		        	},
 		        	error: function() {
 		        	
+		        		// search username ajax request failed
 		        		// execute error callback
 						plugin.settings.error.call(this);
 			        	
