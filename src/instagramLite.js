@@ -58,11 +58,42 @@ Licensed under the MIT license
 	        });
         } 
     },
+    
     getMaxId = function(items){
     
     	// return id of last item
     	return items[items.length-1].id;
     },
+    
+    formatCaption = function(caption) {
+    
+    	var words = caption.split(' '),
+    		newCaption = '';
+    	
+    	for(var i = 0; i < words.length; i++) {
+    	
+    		//console.log(words[i][0]);
+    		
+    		var word;
+	    	
+	    	if(words[i][0] == '@') {
+		    	var a = '<a href="http://twitter.com/'+words[i].replace('@', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
+		    	word = a;
+		    } else if(words[i][0] == '#') {
+		    	var a = '<a href="http://twitter.com/hashtag/'+words[i].replace('#', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
+		    	word = a;
+	    	} else {
+		    	word = words[i]
+	    	}
+
+	    	newCaption += word + ' ';
+	    	
+    	}
+    
+    	return newCaption;
+	    
+    },
+    
     loadContent = function(){
 
     	// if client ID and username were provided
@@ -129,9 +160,9 @@ Licensed under the MIT license
 									        			}
 									        			
 									        			// if caption setting is true
-									        			if(plugin.settings.captions) {
+									        			if(plugin.settings.captions && thisMedia.caption) {
 									        			
-									        				img += '<div class="il-photo__caption" data-caption-id="'+thisMedia.caption.id+'">'+thisMedia.caption.text+'</div>';
+									        				img += '<div class="il-photo__caption" data-caption-id="'+thisMedia.caption.id+'">'+self.formatCaption(thisMedia.caption.text)+'</div>';
 										        			
 									        			}
 									        			
