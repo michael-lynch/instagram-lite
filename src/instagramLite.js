@@ -26,6 +26,9 @@ Licensed under the MIT license
             limit: null,
             list: true,
             urls: false,
+            captions: false,
+            date: false,
+            likes: false,
             max_id: null,
             loadMore: null,
             error: function() {},
@@ -75,7 +78,7 @@ Licensed under the MIT license
 		        	url: 'https://api.instagram.com/v1/users/search?q='+plugin.settings.username+'&client_id='+plugin.settings.clientID+'&callback=?',
 		        	dataType: 'jsonp',
 		        	success: function(data) {
-		        	
+
 		        		if(data.data.length) {
 		        	
 			        		// for each user returned
@@ -112,7 +115,7 @@ Licensed under the MIT license
 								        			if(thisMedia.type === 'image') {
 								        			
 									        			// construct image
-									        			var img = '<img src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
+									        			var img = '<img class="il-photo__img" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
 	
 									        			// if url setting is true
 									        			if(plugin.settings.urls) {
@@ -121,9 +124,38 @@ Licensed under the MIT license
 										        			
 									        			}
 									        			
+									        			if(plugin.settings.captions || plugin.settings.date || plugin.settings.likes) {
+										        			img += '<div class="il-photo__meta">';
+									        			}
+									        			
+									        			// if caption setting is true
+									        			if(plugin.settings.captions) {
+									        			
+									        				img += '<div class="il-photo__caption" data-caption-id="'+thisMedia.caption.id+'">'+thisMedia.caption.text+'</div>';
+										        			
+									        			}
+									        			
+									        			// if date setting is true
+									        			if(plugin.settings.date) {
+									        			
+									        				img += '<div class="il-photo__date">'+thisMedia.created_time+'</div>';
+										        			
+									        			}
+									        			
+									        			// if likes setting is true
+									        			if(plugin.settings.likes) {
+									        			
+									        				img += '<div class="il-photo__likes">'+thisMedia.likes.count+'</div>';
+										        			
+									        			}
+									        			
+									        			if(plugin.settings.captions || plugin.settings.date || plugin.settings.likes) {
+										        			img += '</div>';
+									        			}
+									        			
 									        			// if list setting is true
 									        			if(plugin.settings.list) {
-									        				var img = '<li>'+img+'</li>';
+									        				var img = '<li class="il-photo" data-instagram-id="'+thisMedia.id+'">'+img+'</li>';
 									        			}
 	
 									        			// append image

@@ -60,6 +60,18 @@ clientID: string
 <br />A boolean value that indicates whether or not the images should be linked to their page on Instagram (default: false).
 </li>
 
+<li>captions: boolean
+<br />A boolean value that indicates whether or not the photo captions should be displayed (default: false).
+</li>
+
+<li>date: boolean
+<br />A boolean value that indicates whether or not the date of when the photo was taken should be displayed (default: false).
+</li>
+
+<li>likes: boolean
+<br />A boolean value that indicates whether or not the photo like count should be displayed (default: false).
+</li>
+
 <li>loadMore: string
 <br />A string that defines the class, ID or element you are using as a button to load more photos. (default: null).
 </li>
