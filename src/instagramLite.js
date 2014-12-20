@@ -169,7 +169,17 @@ Licensed under the MIT license
 									        			// if date setting is true
 									        			if(plugin.settings.date) {
 									        			
-									        				img += '<div class="il-photo__date">'+thisMedia.created_time+'</div>';
+									        				var date = new Date(thisMedia.created_time * 1000),
+									        					day = date.getDate(),
+																month = date.getMonth() + 1,
+																year = date.getFullYear(),
+																hours = date.getHours(),
+																minutes = date.getMinutes(),
+																seconds = date.getSeconds();
+																
+															date = month +'/'+ day +'/'+ year;
+									        			
+									        				img += '<div class="il-photo__date">'+date+'</div>';
 										        			
 									        			}
 									        			
