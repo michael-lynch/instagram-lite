@@ -61,7 +61,7 @@ clientID: string
 </li>
 
 <li>videos: boolean
-<br />A boolean value that indicates whether or not videos should be displayed (default: false).
+<br />A boolean value that indicates whether or not videos should be displayed (default: false). <em><sup>*</sup>Note that videos are `.mp4` and currently only work in webkit.</em>
 </li>
 
 <li>captions: boolean
