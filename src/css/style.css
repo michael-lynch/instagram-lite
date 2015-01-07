@@ -16,7 +16,7 @@ a {
 	color: #517FA4; 
 }
 
-a.load-more {
+a.il-load-more {
 	display: block;
 	margin: 20px 0;
 	float: left;
@@ -36,7 +36,8 @@ ul li {
 	width: 200px;
 }
 
-ul li img {
+ul li img,
+ul li video {
 	display: block;
 	width: 100%;
 	height: auto;

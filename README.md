@@ -60,6 +60,10 @@ clientID: string
 <br />A boolean value that indicates whether or not the images should be linked to their page on Instagram (default: false).
 </li>
 
+<li>videos: boolean
+<br />A boolean value that indicates whether or not videos should be displayed (default: false).
+</li>
+
 <li>captions: boolean
 <br />A boolean value that indicates whether or not the photo captions should be displayed (default: false).
 </li>

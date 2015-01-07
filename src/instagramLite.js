@@ -25,6 +25,7 @@ Licensed under the MIT license
             clientID: null,
             limit: null,
             list: true,
+            videos: false,
             urls: false,
             captions: false,
             date: false,
@@ -109,7 +110,7 @@ Licensed under the MIT license
 		        	url: 'https://api.instagram.com/v1/users/search?q='+plugin.settings.username+'&client_id='+plugin.settings.clientID+'&callback=?',
 		        	dataType: 'jsonp',
 		        	success: function(data) {
-
+	
 		        		if(data.data.length) {
 		        	
 			        		// for each user returned
@@ -132,6 +133,8 @@ Licensed under the MIT license
 							        	url: url,
 							        	dataType: 'jsonp',
 							        	success: function(data) {
+							        	
+							        		console.log(data);
 							        		
 							        		// if success status
 							        		if(data.meta.code === 200 && data.data.length) {
@@ -140,29 +143,30 @@ Licensed under the MIT license
 								        		for(var i = 0; i < data.data.length; i++) {
 								        		
 								        			// define media namespace
-								        			var thisMedia = data.data[i];
+								        			var thisMedia = data.data[i],
+								        				item;
 								        			
 								        			// if media type is image
 								        			if(thisMedia.type === 'image') {
 								        			
 									        			// construct image
-									        			var img = '<img class="il-photo__img" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
+									        			item = '<img class="il-photo__img" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
 	
 									        			// if url setting is true
 									        			if(plugin.settings.urls) {
 									        			
-									        				var img = '<a href="'+thisMedia.link+'" target="_blank">'+img+'</a>';
+									        				item = '<a href="'+thisMedia.link+'" target="_blank">'+item+'</a>';
 										        			
 									        			}
 									        			
 									        			if(plugin.settings.captions || plugin.settings.date || plugin.settings.likes) {
-										        			img += '<div class="il-photo__meta">';
+										        			item += '<div class="il-photo__meta">';
 									        			}
 									        			
 									        			// if caption setting is true
 									        			if(plugin.settings.captions && thisMedia.caption) {
 									        			
-									        				img += '<div class="il-photo__caption" data-caption-id="'+thisMedia.caption.id+'">'+self.formatCaption(thisMedia.caption.text)+'</div>';
+									        				item += '<div class="il-photo__caption" data-caption-id="'+thisMedia.caption.id+'">'+self.formatCaption(thisMedia.caption.text)+'</div>';
 										        			
 									        			}
 									        			
@@ -179,30 +183,61 @@ Licensed under the MIT license
 																
 															date = month +'/'+ day +'/'+ year;
 									        			
-									        				img += '<div class="il-photo__date">'+date+'</div>';
+									        				item += '<div class="il-photo__date">'+date+'</div>';
 										        			
 									        			}
 									        			
 									        			// if likes setting is true
 									        			if(plugin.settings.likes) {
 									        			
-									        				img += '<div class="il-photo__likes">'+thisMedia.likes.count+'</div>';
+									        				item += '<div class="il-photo__likes">'+thisMedia.likes.count+'</div>';
 										        			
 									        			}
 									        			
 									        			if(plugin.settings.captions || plugin.settings.date || plugin.settings.likes) {
-										        			img += '</div>';
+										        			item += '</div>';
 									        			}
-									        			
-									        			// if list setting is true
-									        			if(plugin.settings.list) {
-									        				var img = '<li class="il-photo" data-instagram-id="'+thisMedia.id+'">'+img+'</li>';
-									        			}
-	
-									        			// append image
-									        			el.append(img);
-								        			
+
 								        			}
+								        			
+								        			if(thisMedia.type === 'video' && plugin.settings.videos) {
+								        				
+								        				if(thisMedia.videos) {
+								        				
+								        					var src;
+								        				
+								        					if(thisMedia.videos.standard_resolution) {
+								        					
+								        						src = thisMedia.videos.standard_resolution.url;
+									        					
+								        					} else if(thisMedia.videos.low_resolution) {
+								        					
+								        						src = thisMedia.videos.low_resolution.url;
+									        					
+								        					} else if(thisMedia.videos.low_bandwidth) {
+								        					
+								        						src = thisMedia.videos.low_bandwidth.url;
+									        					
+								        					}
+								        					
+								        					item = '<video poster="'+thisMedia.images.standard_resolution.url+'" controls>';
+								        					
+								        					item += '<source src="'+src+'" type="video/mp4;"></source>';
+								        					
+								        					item += '</video>';
+									        				
+								        				}
+								        			}
+								        			
+								        			// if list setting is true
+								        			if(plugin.settings.list) {
+								        			
+								        				// redefine item with wrapping list item
+								        				item = '<li class="il-item" data-instagram-id="'+thisMedia.id+'">'+item+'</li>';
+								        			}
+
+								        			// append image
+								        			el.append(item);
 								        			
 								        		}
 								        		
