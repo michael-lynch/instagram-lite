@@ -112,7 +112,7 @@ $(function() {
 			if(errorCode && errorMessage) {
 				console.log(errorCode +': '+ errorMessage);
 			}
-		}
+		},
 		success: function() {
 			console.log('The request was successful!');
 		}
