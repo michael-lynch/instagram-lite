@@ -34,7 +34,7 @@ Licensed under the MIT license
             date: false,
             likes: false,
             max_id: null,
-            loadMore: null,
+            load_more: null,
             error: function() {},
             success: function() {}
         }
@@ -266,8 +266,8 @@ Licensed under the MIT license
 	    }
 	    
 	    // bind load more click event
-        if(s.loadMore){
-        	$(s.loadMore).on('click', function(e) {
+        if(s.load_more){
+        	$(s.load_more).on('click', function(e) {
 	        	e.preventDefault();
 	        	loadContent();
 	        });

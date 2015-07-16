@@ -76,7 +76,7 @@ clientID: string
 <br />A boolean value that indicates whether or not the photo like count should be displayed (default: false).
 </li>
 
-<li>loadMore: string
+<li>load_more: string
 <br />A string that defines the class, ID or element you are using as a button to load more photos. (default: null).
 </li>
 
@@ -104,7 +104,7 @@ $(function() {
 		username: 'yourusername',
 		list: false,
 		urls: false,
-		loadMore: '.load-more',
+		load_more: '.load-more',
 		success: function() {
 			console.log('The request was successful!');
 		},
