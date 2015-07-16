@@ -22,24 +22,42 @@
 
 	<body lang="en">
 	
-		<h1>Recent Instagram Photos from <a href="http://instagram.com/acozykitchen">@acozykitchen</a></h1>
+		<div class="wrapper">
+		
+			<h1>Recent Instagram Photos from <a href="http://instagram.com/foodnetwork" target="_blank">@foodnetwork</a></h1>
 
-		<ul class="il"></ul>
+			<ul class="il-foodnetwork"></ul>
+			
+			<a href="#" class="il-foodnetwork-load-more il-load-more" title="Load more images from Instagram">Load more</a>
+			
+		</div>
+
+		<div class="wrapper">
 		
-		<a href="#" class="il-load-more" title="Load more images from Instagram">Load more</a>
-		
+			<h1>Recent Instagram Photos from <a href="http://instagram.com/buzzfeedfood" target="_blank">@buzzfeedfood</a></h1>
+
+			<ul class="il-buzzfeedfood"></ul>
+			
+			<a href="#" class="il-buzzfeedfood-load-more il-load-more" title="Load more images from Instagram">Load more</a>
+			
+		</div>
+
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		
 		<script src="/src/instagramLite.js"></script>
 		
 		<script>
 		
-			$('.il').instagramLite({
-				username: 'acozykitchen',
+			$('.il-foodnetwork').instagramLite({
+				username: 'foodnetwork',
 				clientID: '199554eb34504658a4770d2859b5a583',
 				urls: true,
 				limit: 10,
-				loadMore: '.il-load-more',
+				loadMore: '.il-foodnetwork-load-more',
+				success: function() {
+				
+					console.log('The request was successful!');
+				},
 				error: function(errorCode, errorMessage) {
 				
 					console.log('There was an error');
@@ -50,9 +68,31 @@
 					
 					}
 					
-				},
+				}
+			});
+			
+			$('.il-buzzfeedfood').instagramLite({
+				username: 'buzzfeedfood',
+				clientID: '199554eb34504658a4770d2859b5a583',
+				urls: true,
+				limit: 10,
+				videos: true,
+				loadMore: '.il-buzzfeedfood-load-more',
 				success: function() {
+				
 					console.log('The request was successful!');
+					
+				},
+				error: function(errorCode, errorMessage) {
+				
+					console.log('There was an error');
+				
+					if(errorCode && errorMessage) {
+				
+						alert(errorCode +': '+ errorMessage);
+					
+					}
+					
 				}
 			});
 		

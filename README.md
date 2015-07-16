@@ -80,7 +80,7 @@ clientID: string
 <br />A string that defines the class, ID or element you are using as a button to load more photos. (default: null).
 </li>
 
-<li>limit: string
+<li>max_id: string
 <br />A string that indicates the ID of the image that the feed should begin from. (default: null).
 </li>
 
@@ -105,6 +105,9 @@ $(function() {
 		list: false,
 		urls: false,
 		loadMore: '.load-more',
+		success: function() {
+			console.log('The request was successful!');
+		},
 		error: function(errorCode, errorMessage) {
 		
 			console.log('There was an error with the request');
@@ -112,9 +115,6 @@ $(function() {
 			if(errorCode && errorMessage) {
 				console.log(errorCode +': '+ errorMessage);
 			}
-		},
-		success: function() {
-			console.log('The request was successful!');
 		}
 	});
 		
