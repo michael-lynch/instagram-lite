@@ -76,6 +76,10 @@ clientID: string
 <br />A boolean value that indicates whether or not the photo like count should be displayed (default: false).
 </li>
 
+<li>comments_count: boolean
+<br />A boolean value that indicates whether or not the photo comment count should be displayed (default: false).
+</li>
+
 <li>load_more: string
 <br />A string that defines the class, ID or element you are using as a button to load more photos. (default: null).
 </li>
