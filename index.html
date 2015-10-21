@@ -22,24 +22,28 @@
 
 	<body lang="en">
 	
-		<div class="wrapper">
+		<div class="content">
+			
+			<div class="wrapper">
+			
+				<h1>Recent Instagram Photos from <a href="http://instagram.com/foodnetwork" target="_blank">@foodnetwork</a></h1>
+	
+				<ul class="il-foodnetwork"></ul>
+				
+				<a href="#" class="il-foodnetwork-load-more il-load-more" title="Load more images from Instagram">Load more</a>
+				
+			</div>
+	
+			<div class="wrapper">
+			
+				<h1>Recent Instagram Photos from <a href="http://instagram.com/buzzfeedfood" target="_blank">@buzzfeedfood</a></h1>
+	
+				<ul class="il-buzzfeedfood"></ul>
+				
+				<a href="#" class="il-buzzfeedfood-load-more il-load-more" title="Load more images from Instagram">Load more</a>
+				
+			</div>
 		
-			<h1>Recent Instagram Photos from <a href="http://instagram.com/foodnetwork" target="_blank">@foodnetwork</a></h1>
-
-			<ul class="il-foodnetwork"></ul>
-			
-			<a href="#" class="il-foodnetwork-load-more il-load-more" title="Load more images from Instagram">Load more</a>
-			
-		</div>
-
-		<div class="wrapper">
-		
-			<h1>Recent Instagram Photos from <a href="http://instagram.com/buzzfeedfood" target="_blank">@buzzfeedfood</a></h1>
-
-			<ul class="il-buzzfeedfood"></ul>
-			
-			<a href="#" class="il-buzzfeedfood-load-more il-load-more" title="Load more images from Instagram">Load more</a>
-			
 		</div>
 		
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -52,7 +56,10 @@
 				username: 'foodnetwork',
 				clientID: '199554eb34504658a4770d2859b5a583',
 				urls: true,
-				limit: 10,
+				limit: 8,
+				captions: true,
+				likes: true,
+				comments_count: true,
 				load_more: '.il-foodnetwork-load-more',
 				success: function() {
 				
@@ -75,7 +82,7 @@
 				username: 'buzzfeedfood',
 				clientID: '199554eb34504658a4770d2859b5a583',
 				urls: true,
-				limit: 10,
+				limit: 8,
 				videos: true,
 				load_more: '.il-buzzfeedfood-load-more',
 				success: function() {
