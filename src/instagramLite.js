@@ -33,6 +33,7 @@ Licensed under the MIT license
             captions: false,
             date: false,
             likes: false,
+            comments_count: false,
             max_id: null,
             load_more: null,
             error: function() {},
@@ -133,7 +134,7 @@ Licensed under the MIT license
 									        			
 								        			}
 								        			
-								        			if(s.captions || s.date || s.likes) {
+								        			if(s.captions || s.date || s.likes || s.comments_count) {
 									        			item += '<div class="il-photo__meta">';
 								        			}
 								        			
@@ -168,7 +169,14 @@ Licensed under the MIT license
 									        			
 								        			}
 								        			
-								        			if(s.captions || s.date || s.likes) {
+								        			// if caption setting is true
+								        			if(s.comments_count && thisMedia.comments) {
+								        			
+								        				item += '<div class="il-photo__comments">'+thisMedia.comments.count+'</div>';
+									        			
+								        			}
+								        			
+								        			if(s.captions || s.date || s.likes || s.comments_count) {
 									        			item += '</div>';
 								        			}
 

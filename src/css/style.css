@@ -1,7 +1,13 @@
+* {
+	box-sizing: border-box;
+}
+
 body {
 	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 24px;
 	margin: 0;
-	padding: 40px;
+	padding: 40px 0;
 }
 
 .wrapper {
@@ -9,11 +15,17 @@ body {
 	width: 100%;
 }
 
+.content {
+	margin: 0 auto;
+	width: 90%;
+	max-width: 1400px;
+}
+
 h1 {
-	font-size: 30px;
+	font-size: 20px;
 	font-weight: bold;
-	line-height: 40px;
-	margin: 0 0 40px 0;
+	line-height: 30px;
+	margin: 0 0 20px 0;
 	color: #517FA4;
 }
 
@@ -24,7 +36,7 @@ a {
 a.il-load-more {
 	background: #517FA4;
 	display: inline-block;
-	margin: 40px 0;
+	margin: 0 0 40px 0;
 	padding: 20px;
 	font-size: 14px;
 	line-height: 14px;
@@ -46,16 +58,68 @@ ul {
 }
 
 ul li {
+	border: 1px #ccc solid;
 	list-style: none;
-	margin: 0;
+	margin: 0 0 40px 0;
 	padding: 0;
 	float: left;
-	width: 200px;
+	width: 100%;
 }
 
 ul li img,
 ul li video {
+	border-bottom: 1px #ccc solid;
 	display: block;
 	width: 100%;
 	height: auto;
+}
+
+.il-photo__meta {
+	background: #eee;
+	padding: 20px;
+}
+
+.il-photo__caption {
+	margin: 0 0 20px 0;
+}
+
+.il-photo__likes:before {
+	content: "Likes: ";
+}
+
+.il-photo__comments:before {
+	content: "Comments: ";
+}
+
+@media screen and (min-width: 600px) {
+	
+	ul li {
+		margin: 0 40px 40px 0;
+		width: calc(50% - 20px);
+	}
+	
+	ul li:nth-child(2n+2) {
+		margin-right: 0;
+	}
+	
+	.il-photo__caption {
+		height: 120px;
+		overflow-y: scroll;
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	
+	ul li {
+		margin: 0 40px 40px 0;
+		width: calc(25% - 30px);
+	}
+	
+	ul li:nth-child(2n+2) {
+		margin-right: 40px;
+	}
+	
+	ul li:nth-child(4n+4) {
+		margin-right: 0;
+	}
 }
