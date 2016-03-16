@@ -1,26 +1,30 @@
-#Instagram Lite
+### Important Read
+
+**Unfortunately this plugin is no longer usable.** *As of November 17 2015, Instagram has implemented a formal approval process for all applications using their API and has closed off all client side requests, as user authentication using oAUth is now required. This means you can no longer make API requests as a content owner. If you created your application and client ID prior to this change, you have until June 2016 until it expires. For more information, visit [the Instagram API documentation](https://www.instagram.com/developer/).*
+
+# Instagram Lite
 
 A simple, lightweight jQuery plugin used to display a user's Instagram photos.
 
 <a href="http://michael-lynch.github.io/instagram-lite/" target="_blank">See a demo</a>
 
-##Instructions
+## Instructions
 
 Include jQuery and the plugin in the head or footer of your page.
 
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    
+
 <script src="/js/plugins/instagramLite.js"></script>
 ```
-    
+
 Create a list with an ID or class that will contain the user's Instagram photos.
 
 ```html
 <ul class="instagram-lite"></ul>
 ```
-    
-Initialize the plugin targeting the class, ID or element and pass the function your client ID (api key) and username. 
+
+Initialize the plugin targeting the class, ID or element and pass the function your client ID (api key) and username.
 
 ```js
 $('.instagram-lite').instagramLite({
@@ -29,7 +33,7 @@ $('.instagram-lite').instagramLite({
 });
 ```
 
-####Required Properties
+#### Required Properties
 
 <ol>
 
@@ -39,12 +43,12 @@ clientID: string
 </li>
 
 <li>username: string
-<br />A string that defines the username of the user you want to retrieve Instagram photos from. 
+<br />A string that defines the username of the user you want to retrieve Instagram photos from.
 </li>
 
 </ol>
-	
-####Optional Properties
+
+#### Optional Properties
 
 <ol>
 
@@ -98,11 +102,11 @@ clientID: string
 
 </ol>
 
-#####Example:
+##### Example:
 
 ```js
 $(function() {
-	
+
 	$('.instagram-lite').instagramLite({
 		clientID: 'XXXXXXXXXXXXXXXXXXXXX',
 		username: 'yourusername',
@@ -113,14 +117,14 @@ $(function() {
 			console.log('The request was successful!');
 		},
 		error: function(errorCode, errorMessage) {
-		
+
 			console.log('There was an error with the request');
-			
+
 			if(errorCode && errorMessage) {
 				console.log(errorCode +': '+ errorMessage);
 			}
 		}
 	});
-		
+
 });
 ```		
