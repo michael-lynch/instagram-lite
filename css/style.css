@@ -33,24 +33,6 @@ a {
 	color: #517FA4;
 }
 
-a.il-load-more {
-	background: #517FA4;
-	display: inline-block;
-	margin: 0 0 40px 0;
-	padding: 20px;
-	font-size: 14px;
-	line-height: 14px;
-	text-decoration: none;
-	border-radius: 6px;
-	text-transform: uppercase;
-	font-weight: 600;
-	color: #fff;
-}
-
-a.il-load-more:hover {
-	background: #125688;
-}
-
 ul {
 	padding: 0;
 	float: left;
@@ -92,16 +74,16 @@ ul li video {
 }
 
 @media screen and (min-width: 600px) {
-	
+
 	ul li {
 		margin: 0 40px 40px 0;
 		width: calc(50% - 20px);
 	}
-	
+
 	ul li:nth-child(2n+2) {
 		margin-right: 0;
 	}
-	
+
 	.il-photo__caption {
 		height: 120px;
 		overflow-y: scroll;
@@ -109,16 +91,16 @@ ul li video {
 }
 
 @media screen and (min-width: 1000px) {
-	
+
 	ul li {
 		margin: 0 40px 40px 0;
 		width: calc(25% - 30px);
 	}
-	
+
 	ul li:nth-child(2n+2) {
 		margin-right: 40px;
 	}
-	
+
 	ul li:nth-child(4n+4) {
 		margin-right: 0;
 	}
