@@ -1,12 +1,22 @@
-### Important Read
-
-**Unfortunately this plugin is no longer usable.** *As of November 17 2015, Instagram has implemented a formal approval process for all applications using their API and has closed off all client side requests, as user authentication using oAUth is now required. This means you can no longer make API requests as a content owner. If you created your application and client ID prior to this change, you have until June 2016 until it expires. For more information, visit [the Instagram API documentation](https://www.instagram.com/developer/).*
-
 # Instagram Lite
 
-A simple, lightweight jQuery plugin used to display a user's Instagram photos.
+A simple, lightweight jQuery plugin used to display a user's Instagram photos and videos.
+
+*Note that you must be the owner of the Instagram account being displayed and that Instagram only allows you to show up to 20 pieces of media.*
 
 <a href="http://michael-lynch.github.io/instagram-lite/" target="_blank">See a demo</a>
+
+### Important Read
+
+**This plugin requires a valid `access_token` issued by Instagram. To get an access token, login to the [Instagram Developer](https://www.instagram.com/developer/) site, create an app and hit this URL in your browser (replace `CLIENT-ID` with your actual client ID and `REDIRECT-URI` with your actual redirect URI):**
+
+https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token&scope=public_content
+
+Instagram will redirect you to your redirect URL with the access token appended to it. It should look like this:
+
+https://myredireturi.com?access_token=1730464.199554e.e561d1b801d74e35a1453110a44a09e8
+
+Copy the `access_token` in the URL. This is what you'll need to use the plugin.
 
 ## Instructions
 
@@ -24,12 +34,11 @@ Create a list with an ID or class that will contain the user's Instagram photos.
 <ul class="instagram-lite"></ul>
 ```
 
-Initialize the plugin targeting the class, ID or element and pass the function your client ID (api key) and username.
+Initialize the plugin targeting the class, ID or element and pass the function your access token.
 
 ```js
 $('.instagram-lite').instagramLite({
-	clientID: 'XXXXXXXXXXXXXXXXXXXXX',
-	username: 'yourusername'
+	accessToken: 'XXXXXXXXXXXXXXXXXXXXX'
 });
 ```
 
@@ -38,12 +47,8 @@ $('.instagram-lite').instagramLite({
 <ol>
 
 <li>
-clientID: string
-<br />A string that defines your client ID provided by Instagram.
-</li>
-
-<li>username: string
-<br />A string that defines the username of the user you want to retrieve Instagram photos from.
+accessToken: string
+<br />A string that defines your access token provided by Instagram.
 </li>
 
 </ol>
@@ -84,16 +89,8 @@ clientID: string
 <br />A boolean value that indicates whether or not the photo comment count should be displayed (default: false).
 </li>
 
-<li>load_more: string
-<br />A string that defines the class, ID or element you are using as a button to load more photos. (default: null).
-</li>
-
-<li>max_id: string
-<br />A string that indicates the ID of the image that the feed should begin from. (default: null).
-</li>
-
-<li>error: function(errorCode, errorMessage)
-<br />A callback function that is triggered after the request if the request is not sucessful. If Instagram returns an error, the error code and error message will be passed to this callback function.
+<li>error: function()
+<br />A callback function that is triggered after the request if the request is not successful.
 </li>
 
 <li>success: function()
@@ -108,23 +105,15 @@ clientID: string
 $(function() {
 
 	$('.instagram-lite').instagramLite({
-		clientID: 'XXXXXXXXXXXXXXXXXXXXX',
-		username: 'yourusername',
+		accessToken: 'XXXXXXXXXXXXXXXXXXXXX',
 		list: false,
 		urls: false,
-		load_more: '.load-more',
 		success: function() {
 			console.log('The request was successful!');
 		},
 		error: function(errorCode, errorMessage) {
-
 			console.log('There was an error with the request');
-
-			if(errorCode && errorMessage) {
-				console.log(errorCode +': '+ errorMessage);
-			}
 		}
 	});
-
 });
 ```		

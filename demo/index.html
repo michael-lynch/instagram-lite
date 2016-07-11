@@ -5,106 +5,62 @@
 <head>
 
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	
+
 	<meta charset="utf-8">
 
 	<title>jQuery Instagram Lite Plugin</title>
-	
+
 	<meta name="description" content="A simple, lightweight jQuery plugin used to display a user's Instagram photos.">
-	
+
 	<meta name="author" content="http://michaelynch.com">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 	<link rel="stylesheet" type="text/css" media="screen" href="/src/css/style.css">
-	
+
 </head>
 
 	<body lang="en">
-	
-		<div class="content">
-		
-			<div class="wrapper">
-			
-				<h1>Recent Instagram Photos from <a href="http://instagram.com/foodnetwork" target="_blank">@foodnetwork</a></h1>
-	
-				<ul class="il-foodnetwork"></ul>
-				
-				<a href="#" class="il-foodnetwork-load-more il-load-more" title="Load more images from Instagram">Load more</a>
-				
+
+		<div class="wrapper">
+
+			<div class="content">
+
+				<div class="wrapper">
+
+					<h1>Recent Instagram Photos from <a href="http://instagram.com/michaelynch" target="_blank">@michaelynch</a></h1>
+
+					<ul class="il-michaelynch"></ul>
+
+				</div>
+
 			</div>
-	
-			<div class="wrapper">
-			
-				<h1>Recent Instagram Photos from <a href="http://instagram.com/buzzfeedfood" target="_blank">@buzzfeedfood</a></h1>
-	
-				<ul class="il-buzzfeedfood"></ul>
-				
-				<a href="#" class="il-buzzfeedfood-load-more il-load-more" title="Load more images from Instagram">Load more</a>
-				
-			</div>
-		
+
 		</div>
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-		
+
 		<script src="/src/instagramLite.js"></script>
-		
+
 		<script>
-		
-			$('.il-foodnetwork').instagramLite({
-				username: 'foodnetwork',
-				clientID: '199554eb34504658a4770d2859b5a583',
+
+			$('.il-michaelynch').instagramLite({
+				accessToken: '1730464.199554e.e561d1b801d74e35a1453110a44a09e8',
 				urls: true,
 				limit: 8,
-				load_more: '.il-foodnetwork-load-more',
 				captions: true,
 				likes: true,
 				comments_count: true,
 				success: function() {
-				
 					console.log('The request was successful!');
 				},
-				error: function(errorCode, errorMessage) {
-				
-					console.log('There was an error');
-				
-					if(errorCode && errorMessage) {
-				
-						alert(errorCode +': '+ errorMessage);
-					
-					}
-					
+				error: function() {
+					console.log('There was an error with your request.');
 				}
 			});
-			
-			$('.il-buzzfeedfood').instagramLite({
-				username: 'buzzfeedfood',
-				clientID: '199554eb34504658a4770d2859b5a583',
-				urls: true,
-				limit: 8,
-				videos: true,
-				load_more: '.il-buzzfeedfood-load-more',
-				success: function() {
-				
-					console.log('The request was successful!');
-					
-				},
-				error: function(errorCode, errorMessage) {
-				
-					console.log('There was an error');
-				
-					if(errorCode && errorMessage) {
-				
-						alert(errorCode +': '+ errorMessage);
-					
-					}
-					
-				}
-			});
-		
+
 		</script>
 
 	</body>
-	
+
 </html>
