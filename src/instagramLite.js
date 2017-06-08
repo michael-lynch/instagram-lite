@@ -25,6 +25,7 @@ Licensed under the MIT license
 		// define default parameters
 		plugin.defaults = {
 			accessToken: null,
+			user_id: 'self',
 			limit: null,
 			list: true,
 			videos: false,
@@ -51,10 +52,10 @@ Licensed under the MIT license
 				var word;
 
 				if(words[i][0] == '@') {
-					var a = '<a href="http://twitter.com/'+words[i].replace('@', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
+					var a = '<a href="http://instagram.com/'+words[i].replace('@', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
 					word = a;
 				} else if(words[i][0] == '#') {
-					var a = '<a href="http://twitter.com/hashtag/'+words[i].replace('#', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
+					var a = '<a href="http://instagram.com/explore/tags/'+words[i].replace('#', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
 					word = a;
 				} else {
 					word = words[i]
@@ -167,7 +168,7 @@ Licensed under the MIT license
 			if(s.accessToken) {
 
 				// construct API endpoint
-				var url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token='+s.accessToken+'&count='+s.limit;
+				var url = 'https://api.instagram.com/v1/users/'+s.user_id+'/media/recent/?access_token='+s.accessToken+'&count='+s.limit;
 
 				$.ajax({
 					type: 'GET',

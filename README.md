@@ -57,6 +57,10 @@ accessToken: string
 
 <ol>
 
+<li>user_id: string
+<br />A string that defines a user ID (not username). Note that the user must be registered as a Sandbox user in your client. (default: 'self').
+</li>
+
 <li>limit: integer
 <br />An integer that indicates the amount of photos to be returned. If loadMore is set, the limit property will determine how many photos are loaded each time. (default: 10).
 </li>
