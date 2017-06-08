@@ -77,7 +77,7 @@ Licensed under the MIT license
 					item;
 
 				// if media type is image or videos is set to false
-				if(thisMedia.type === 'image' || !s.videos) {
+				if(thisMedia.type === 'image' || thisMedia.type === 'carousel' || !s.videos) {
 
 					// construct image
 					item = '<img class="il-photo__img" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
