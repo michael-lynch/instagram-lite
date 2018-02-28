@@ -1,7 +1,7 @@
 {
 	"name": "instagram-lite",
 	"title": "Instagram Lite",
-	"description": "A simple, lightweight jQuery plugin used to display a user's Instagram photos.",
+	"description": "A simple, lightweight jQuery plugin used to display a user's Instagram media",
 	"keywords": [
 		"instagram",
 		"photos",

@@ -51,11 +51,11 @@
 				captions: true,
 				likes: true,
 				comments_count: true,
-				success: function() {
-					console.log('The request was successful!');
+				success: function(data) {
+					console.log(data);
 				},
-				error: function() {
-					console.log('There was an error with your request.');
+				error: function(data) {
+					console.log(data);
 				}
 			});
 

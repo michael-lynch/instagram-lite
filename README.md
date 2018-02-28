@@ -8,7 +8,7 @@ A simple, lightweight jQuery plugin used to display a user's Instagram photos an
 
 ### Important Read
 
-**This plugin requires a valid `access_token` issued by Instagram. To get an access token, login to the [Instagram Developer](https://www.instagram.com/developer/) site, create an app and hit this URL in your browser (replace `CLIENT-ID` with your actual client ID and `REDIRECT-URI` with your actual redirect URI):**
+**This plugin requires a valid `access_token` issued by Instagram. To get an access token, login to the [Instagram Developer](https://www.instagram.com/developer/) site, create an app and hit this URL in your browser (replace `CLIENT-ID` with your client ID and `REDIRECT-URI` with your  redirect URI):**
 
 https://api.instagram.com/oauth/authorize/?client_id=CLIENT-ID&redirect_uri=REDIRECT-URI&response_type=token&scope=public_content
 
@@ -25,7 +25,7 @@ Include jQuery and the plugin in the head or footer of your page.
 ```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<script src="/js/plugins/instagramLite.js"></script>
+<script src="/js/plugins/instagramlite.js"></script>
 ```
 
 Create a list with an ID or class that will contain the user's Instagram photos.
@@ -112,11 +112,12 @@ $(function() {
 		accessToken: 'XXXXXXXXXXXXXXXXXXXXX',
 		list: false,
 		urls: false,
-		success: function() {
-			console.log('The request was successful!');
+		success: function(data) {
+			console.log(data);
 		},
-		error: function(errorCode, errorMessage) {
-			console.log('There was an error with the request');
+		error: function(data) {
+			console.log(data);
+			$('.instagram-lite').remove();
 		}
 	});
 });

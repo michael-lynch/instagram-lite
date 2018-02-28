@@ -5,8 +5,8 @@
 	"authors": [
 		"Michael Lynch <mikethomaslynch@gmail.com>"
 	],
-	"description": "A simple, lightweight jQuery plugin used to display a user's Instagram photos.",
-	"main": "build/instagramLite.min.js",
+	"description": "A simple, lightweight jQuery plugin used to display a user's Instagram media",
+	"main": "src/instagramlite.js",
 	"keywords": [
 		"instagram",
 		"api",

@@ -1,0 +1,15 @@
+{
+	"name": "instagram-lite",
+	"version": "2.0.0",
+	"homepage": "https://github.com/michael-lynch/instagram-lite",
+	"author": "Michael Lynch <mikethomaslynch@gmail.com>",
+	"description": "A simple, lightweight jQuery plugin used to display a user's Instagram media",
+	"main": "build/instagramlite.min.js",
+	"license": "MIT",
+	"keywords": [
+		"reading",
+		"time",
+		"estimated",
+		"eta"
+	]
+}

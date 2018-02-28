@@ -20,7 +20,7 @@ Licensed under the MIT license
 		}
 
 		// define plugin
-		plugin = this;
+		const plugin = this;
 
 		// define default parameters
 		plugin.defaults = {
@@ -39,23 +39,24 @@ Licensed under the MIT license
 		}
 
 		// vars
-		var s = $.extend({}, plugin.defaults, options),
-			el = $(this);
+		const s = $.extend({}, plugin.defaults, options);
+		const el = $(this);
 
-		var formatCaption = function(caption) {
+		const formatCaption = function(caption) {
 
-			var words = caption.split(' '),
-				newCaption = '';
+			let words = caption.split(' ');
+			let newCaption = '';
 
-			for(var i = 0; i < words.length; i++) {
+			for(let i = 0; i < words.length; i++) {
 
-				var word;
+				let word;
+				let a;
 
 				if(words[i][0] == '@') {
-					var a = '<a href="http://instagram.com/'+words[i].replace('@', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
+					a = '<a href="http://instagram.com/'+words[i].replace('@', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
 					word = a;
 				} else if(words[i][0] == '#') {
-					var a = '<a href="http://instagram.com/explore/tags/'+words[i].replace('#', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
+					a = '<a href="http://instagram.com/explore/tags/'+words[i].replace('#', '').toLowerCase()+'" target="_blank">'+words[i]+'</a>';
 					word = a;
 				} else {
 					word = words[i]
@@ -65,27 +66,27 @@ Licensed under the MIT license
 			}
 
 			return newCaption;
-
 		};
 
-		var constructMedia = function(data) {
+		const constructMedia = function(data) {
 
 			// for each piece of media returned
-			for(var i = 0; i < data.length; i++) {
+			for(let i = 0; i < data.length; i++) {
 
 				// define media namespace
-				var thisMedia = data[i],
-					item;
+				const thisMedia = data[i];
+
+				let item;
 
 				// if media type is image or videos is set to false
 				if(thisMedia.type === 'image' || thisMedia.type === 'carousel' || !s.videos) {
 
 					// construct image
-					item = '<img class="il-photo__img" src="'+thisMedia.images.standard_resolution.url+'" alt="Instagram Image" data-filter="'+thisMedia.filter+'" />';
+					item = `<img class="il-photo__img" src="${thisMedia.images.standard_resolution.url}" alt="Instagram Image" data-filter="${thisMedia.filte}" />`;
 
 					// if url setting is true
 					if(s.urls) {
-						item = '<a href="'+thisMedia.link+'" target="_blank">'+item+'</a>';
+						item = `<a href="${thisMedia.link}" target="_blank">${item}</a>`;
 					}
 
 					if(s.captions || s.date || s.likes || s.comments_count) {
@@ -94,33 +95,34 @@ Licensed under the MIT license
 
 					// if caption setting is true
 					if(s.captions && thisMedia.caption) {
-						item += '<div class="il-photo__caption" data-caption-id="'+thisMedia.caption.id+'">'+formatCaption(thisMedia.caption.text)+'</div>';
+						item += `<div class="il-photo__caption" data-caption-id="${thisMedia.caption.id}">${formatCaption(thisMedia.caption.text)}</div>`;
 					}
 
 					// if date setting is true
 					if(s.date) {
 
-						var date = new Date(thisMedia.created_time * 1000),
-							day = date.getDate(),
-							month = date.getMonth() + 1,
-							year = date.getFullYear(),
-							hours = date.getHours(),
-							minutes = date.getMinutes(),
-							seconds = date.getSeconds();
+						let date = new Date(thisMedia.created_time * 1000);
 
-						date = month +'/'+ day +'/'+ year;
+						const day = date.getDate();
+						const month = date.getMonth() + 1;
+						const year = date.getFullYear();
+						const hours = date.getHours();
+						const minutes = date.getMinutes();
+						const seconds = date.getSeconds();
 
-						item += '<div class="il-photo__date">'+date+'</div>';
+						date = `${month}/${day}/${year}`;
+
+						item += `<div class="il-photo__date">${date}</div>`;
 					}
 
 					// if likes setting is true
 					if(s.likes) {
-						item += '<div class="il-photo__likes">'+thisMedia.likes.count+'</div>';
+						item += `<div class="il-photo__likes">${thisMedia.likes.count}</div>`;
 					}
 
 					// if caption setting is true
 					if(s.comments_count && thisMedia.comments) {
-						item += '<div class="il-photo__comments">'+thisMedia.comments.count+'</div>';
+						item += `<div class="il-photo__comments">${thisMedia.comments.count}</div>`;
 					}
 
 					if(s.captions || s.date || s.likes || s.comments_count) {
@@ -132,7 +134,7 @@ Licensed under the MIT license
 
 					if(thisMedia.videos) {
 
-						var src;
+						let src;
 
 						if(thisMedia.videos.standard_resolution) {
 							src = thisMedia.videos.standard_resolution.url;
@@ -142,9 +144,9 @@ Licensed under the MIT license
 							src = thisMedia.videos.low_bandwidth.url;
 						}
 
-						item = '<video poster="'+thisMedia.images.standard_resolution.url+'" controls>';
-						item += '<source src="'+src+'" type="video/mp4;"></source>';
-						item += '</video>';
+						item = `<video poster="${thisMedia.images.standard_resolution.url}" controls>`;
+						item += `<source src="${src}" type="video/mp4;"></source>`;
+						item += `</video>`;
 					}
 				}
 
@@ -152,7 +154,7 @@ Licensed under the MIT license
 				if(s.list && item) {
 
 					// redefine item with wrapping list item
-					item = '<li class="il-item" data-instagram-id="'+thisMedia.id+'">'+item+'</li>';
+					item = `<li class="il-item" data-instagram-id="${thisMedia.id}>${item}</li>`;
 				}
 
 				// append image / video
@@ -162,13 +164,13 @@ Licensed under the MIT license
 			}
 		}
 
-		var loadContent = function() {
+		const loadContent = function() {
 
 			// if access token
 			if(s.accessToken) {
 
 				// construct API endpoint
-				var url = 'https://api.instagram.com/v1/users/'+s.user_id+'/media/recent/?access_token='+s.accessToken+'&count='+s.limit;
+				let url = `https://api.instagram.com/v1/users/${s.user_id}/media/recent/?access_token=${s.accessToken}&count=${s.limit}`;
 
 				$.ajax({
 					type: 'GET',
@@ -183,16 +185,16 @@ Licensed under the MIT license
 							constructMedia(data.data);
 
 							// execute success callback
-							s.success.call(this);
+							s.success.call(this, data);
 
 						} else {
 							// execute error callback
-							s.error.call(this);
+							s.error.call(this, data);
 						}
 					},
-					error: function() {
+					error: function(data) {
 						// execute error callback
-						s.error.call(this);
+						s.error.call(this, data);
 					}
 				});
 			}
