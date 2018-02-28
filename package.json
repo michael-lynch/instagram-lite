@@ -7,9 +7,9 @@
 	"main": "build/instagramlite.min.js",
 	"license": "MIT",
 	"keywords": [
-		"reading",
-		"time",
-		"estimated",
-		"eta"
+		"instagram",
+		"media",
+		"photo",
+		"video"
 	]
 }
