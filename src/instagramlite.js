@@ -162,7 +162,7 @@ Licensed under the MIT license
 					el.append(item);
 				}
 			}
-		}
+		};
 
 		const loadContent = function() {
 
@@ -198,7 +198,7 @@ Licensed under the MIT license
 					}
 				});
 			}
-		}
+		};
 
 		// init
 		loadContent();
