@@ -154,7 +154,7 @@ Licensed under the MIT license
 				if(s.list && item) {
 
 					// redefine item with wrapping list item
-					item = `<li class="il-item" data-instagram-id="${thisMedia.id}>${item}</li>`;
+					item = `<li class="il-item" data-instagram-id="${thisMedia.id}">${item}</li>`;
 				}
 
 				// append image / video
